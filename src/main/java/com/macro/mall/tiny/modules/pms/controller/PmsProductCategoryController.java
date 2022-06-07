@@ -6,6 +6,7 @@ import com.macro.mall.tiny.common.api.CommonPage;
 import com.macro.mall.tiny.common.api.CommonResult;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
 import com.macro.mall.tiny.modules.pms.model.dto.PmsProductCategoryDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductCateChildrenDTO;
 import com.macro.mall.tiny.modules.pms.service.PmsProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -97,6 +98,17 @@ public class PmsProductCategoryController {
     public CommonResult update(@RequestBody PmsProductCategoryDTO productCategoryDTO) {
         boolean result = productCategoryService.update(productCategoryDTO);
         return result ? CommonResult.success(result) : CommonResult.failed();
+    }
+
+
+    /**
+     * 获取商品一级分类和二级分类的下拉级联数据
+     * @return
+     */
+    @RequestMapping("/list/withChildren")
+    public CommonResult getWithChildren(){
+        List<ProductCateChildrenDTO>  list = productCategoryService.getWithChildren();
+        return CommonResult.success(list);
     }
 }
 

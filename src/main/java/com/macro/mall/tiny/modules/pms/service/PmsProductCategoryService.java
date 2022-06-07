@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.macro.mall.tiny.modules.pms.model.dto.PmsProductCategoryDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductCateChildrenDTO;
 
 import java.util.List;
 
@@ -31,4 +32,6 @@ public interface PmsProductCategoryService extends IService<PmsProductCategory> 
     boolean create(PmsProductCategoryDTO productCategoryDTO);
 
     boolean update(PmsProductCategoryDTO productCategoryDTO);
+
+    List<ProductCateChildrenDTO> getWithChildren();
 }

@@ -8,6 +8,7 @@ import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
 import com.macro.mall.tiny.modules.pms.mapper.PmsProductCategoryMapper;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategoryAttributeRelation;
 import com.macro.mall.tiny.modules.pms.model.dto.PmsProductCategoryDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductCateChildrenDTO;
 import com.macro.mall.tiny.modules.pms.service.PmsProductCategoryAttributeRelationService;
 import com.macro.mall.tiny.modules.pms.service.PmsProductCategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -32,6 +33,9 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
 
     @Autowired
     PmsProductCategoryAttributeRelationService relationService;
+
+    @Autowired
+    PmsProductCategoryMapper productCategoryMapper;
 
     /**
      * 获取商品分类列表
@@ -124,5 +128,10 @@ public class PmsProductCategoryServiceImpl extends ServiceImpl<PmsProductCategor
 
         saveAttrRelation(productCategoryDTO, productCategory);
         return true;
+    }
+
+    @Override
+    public List<ProductCateChildrenDTO> getWithChildren() {
+        return productCategoryMapper.getWithChildren();
     }
 }
