@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 产品分类 服务类
@@ -22,4 +24,6 @@ public interface PmsProductCategoryService extends IService<PmsProductCategory> 
      * @return
      */
     Page list(Long parentId, Integer pageNum, Integer pageSize);
+
+    boolean updateNavStatus(List<Long> ids, Integer navStatus);
 }
