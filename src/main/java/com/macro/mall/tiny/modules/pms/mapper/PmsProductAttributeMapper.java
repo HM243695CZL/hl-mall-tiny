@@ -2,6 +2,10 @@ package com.macro.mall.tiny.modules.pms.mapper;
 
 import com.macro.mall.tiny.modules.pms.model.PmsProductAttribute;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductAttributeDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.RelationAttrInfoDTO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface PmsProductAttributeMapper extends BaseMapper<PmsProductAttribute> {
 
+    List<ProductAttributeDTO> getListWithAttr();
+
+    List<RelationAttrInfoDTO> getRelationAttrInfoByCid(Long cId);
 }

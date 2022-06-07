@@ -3,6 +3,7 @@ package com.macro.mall.tiny.modules.pms.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.macro.mall.tiny.modules.pms.model.dto.PmsProductCategoryDTO;
 
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface PmsProductCategoryService extends IService<PmsProductCategory> 
     Page list(Long parentId, Integer pageNum, Integer pageSize);
 
     boolean updateNavStatus(List<Long> ids, Integer navStatus);
+
+    boolean create(PmsProductCategoryDTO productCategoryDTO);
+
+    boolean update(PmsProductCategoryDTO productCategoryDTO);
 }

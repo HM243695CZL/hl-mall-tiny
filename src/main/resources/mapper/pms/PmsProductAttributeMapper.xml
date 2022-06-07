@@ -4,18 +4,54 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.macro.mall.tiny.modules.pms.model.PmsProductAttribute">
-        <id column="id" property="id" />
-        <result column="product_attribute_category_id" property="productAttributeCategoryId" />
-        <result column="name" property="name" />
-        <result column="select_type" property="selectType" />
-        <result column="input_type" property="inputType" />
-        <result column="input_list" property="inputList" />
-        <result column="sort" property="sort" />
-        <result column="filter_type" property="filterType" />
-        <result column="search_type" property="searchType" />
-        <result column="related_status" property="relatedStatus" />
-        <result column="hand_add_status" property="handAddStatus" />
-        <result column="type" property="type" />
+        <id column="id" property="id"/>
+        <result column="product_attribute_category_id" property="productAttributeCategoryId"/>
+        <result column="name" property="name"/>
+        <result column="select_type" property="selectType"/>
+        <result column="input_type" property="inputType"/>
+        <result column="input_list" property="inputList"/>
+        <result column="sort" property="sort"/>
+        <result column="filter_type" property="filterType"/>
+        <result column="search_type" property="searchType"/>
+        <result column="related_status" property="relatedStatus"/>
+        <result column="hand_add_status" property="handAddStatus"/>
+        <result column="type" property="type"/>
     </resultMap>
+    <resultMap id="getListWithAttrMap" type="com.macro.mall.tiny.modules.pms.model.dto.ProductAttributeDTO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <!-- 嵌套结果 -->
+        <collection property="productAttributeList" columnPrefix="attr_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsProductAttributeMapper.BaseResultMap">
+
+        </collection>
+    </resultMap>
+    <select id="getListWithAttr" resultMap="getListWithAttrMap">
+        SELECT
+            pac.id,
+            pac.`name`,
+            pa.id attr_id,
+            pa.`name` attr_name
+        FROM
+            pms_product_attribute_category pac
+            LEFT JOIN pms_product_attribute pa ON pac.id = pa.product_attribute_category_id
+            AND pa.type = 1
+    </select>
+
+<!--    根据商品分类id获取关联的筛选属性-->
+    <resultMap id="getRelationAttrInfoByCidMap" type="com.macro.mall.tiny.modules.pms.model.dto.RelationAttrInfoDTO">
+        <result column="product_attribute_id" property="attributeId"></result>
+        <result column="product_attribute_category_id" property="attributeCategoryId"></result>
+    </resultMap>
+    <select id="getRelationAttrInfoByCid"
+            resultMap="getRelationAttrInfoByCidMap">
+        SELECT
+            pcar.product_attribute_id,
+            pa.product_attribute_category_id
+        FROM
+            pms_product_category_attribute_relation pcar
+            LEFT JOIN pms_product_attribute pa ON pcar.product_attribute_id = pa.id
+        WHERE
+            pcar.product_category_id = #{cId}
+    </select>
 
 </mapper>

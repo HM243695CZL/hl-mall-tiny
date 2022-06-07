@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.common.api.CommonPage;
 import com.macro.mall.tiny.common.api.CommonResult;
 import com.macro.mall.tiny.modules.pms.model.PmsProductCategory;
+import com.macro.mall.tiny.modules.pms.model.dto.PmsProductCategoryDTO;
 import com.macro.mall.tiny.modules.pms.service.PmsProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,12 +69,12 @@ public class PmsProductCategoryController {
 
     /**
      * 新增商品分类
-     * @param productCategory
+     * @param productCategoryDTO
      * @return
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public CommonResult create (@RequestBody PmsProductCategory productCategory) {
-        boolean result = productCategoryService.save(productCategory);
+    public CommonResult create (@RequestBody PmsProductCategoryDTO productCategoryDTO) {
+        boolean result = productCategoryService.create(productCategoryDTO);
         return result ? CommonResult.success(result) : CommonResult.failed();
     }
 
@@ -89,12 +90,12 @@ public class PmsProductCategoryController {
 
     /**
      * 更新商品分类
-     * @param productCategory
+     * @param productCategoryDTO
      * @return
      */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public CommonResult update(@RequestBody PmsProductCategory productCategory) {
-        boolean result = productCategoryService.updateById(productCategory);
+    public CommonResult update(@RequestBody PmsProductCategoryDTO productCategoryDTO) {
+        boolean result = productCategoryService.update(productCategoryDTO);
         return result ? CommonResult.success(result) : CommonResult.failed();
     }
 }
