@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macro.mall.tiny.modules.pms.model.PmsProduct;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.macro.mall.tiny.modules.pms.model.dto.ProductConditionDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductSaveParamsDTO;
+import com.macro.mall.tiny.modules.pms.model.dto.ProductUpdateInitDTO;
 
 import java.util.List;
 
@@ -28,4 +30,10 @@ public interface PmsProductService extends IService<PmsProduct> {
      * @return
      */
     boolean updateStatus(List<Long> ids, Integer publishStatus, SFunction<PmsProduct, ?> getPublishStatus);
+
+    boolean create(ProductSaveParamsDTO productSaveParamsDTO);
+
+    ProductUpdateInitDTO getUpdateInfo(Long id);
+
+    boolean update(ProductSaveParamsDTO productSaveParamsDTO);
 }

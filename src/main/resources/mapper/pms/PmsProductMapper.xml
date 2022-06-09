@@ -47,5 +47,65 @@
         <result column="brand_name" property="brandName" />
         <result column="product_category_name" property="productCategoryName" />
     </resultMap>
+    <resultMap id="getUpdateInfoMap" extends="BaseResultMap" type="com.macro.mall.tiny.modules.pms.model.dto.ProductUpdateInitDTO">
+<!--        一级分类id-->
+        <result property="cateParentId" column="cate_parent_id"></result>
+<!--        阶梯-->
+        <collection property="productLadderList" columnPrefix="ladder_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsProductLadderMapper.BaseResultMap"></collection>
+<!--        满减-->
+        <collection property="productFullReductionList" columnPrefix="full_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsProductFullReductionMapper.BaseResultMap"></collection>
+<!--        会员-->
+        <collection property="memberPriceList" columnPrefix="member_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsMemberPriceMapper.BaseResultMap"></collection>
+<!--        sku-->
+        <collection property="skuStockList" columnPrefix="sku_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsSkuStockMapper.BaseResultMap"></collection>
+<!--        spu-->
+        <collection property="productAttributeValueList" columnPrefix="att_" resultMap="com.macro.mall.tiny.modules.pms.mapper.PmsProductAttributeValueMapper.BaseResultMap"></collection>
+    </resultMap>
+    <select id="getUpdateInfo" resultMap="getUpdateInfoMap">
+        SELECT
+            p.*,
+            pc.parent_id cate_parent_id,
+            p.brand_id,
+            pl.id ladder_id,
+            pl.count ladder_count,
+            pl.discount ladder_discount,
+            pl.price ladder_price,
+            pl.product_id ladder_product_id,
+            pf.id full_id,
+            pf.full_price full_full_price,
+            pf.product_id full_product_id,
+            pf.reduce_price full_reduce_price,
+            pm.id memeber_id,
+            pm.member_level_id memeber_member_level_id,
+            pm.member_level_name member_member_level_name,
+            pm.member_price member_member_price,
+            pm.product_id member_product_id,
+            sku.id sku_id,
+            sku.lock_stock sku_lock_stock,
+            sku.low_stock sku_low_stock,
+            sku.pic sku_pic,
+            sku.price sku_price,
+            sku.product_id sku_product_id,
+            sku.sale sku_sale,
+            sku.sku_code sku_sku_code,
+            sku.sp1 sku_sp1,
+            sku.sp2 sku_sp2,
+            sku.sp3 sku_sp3,
+            sku.stock sku_stock,
+            att.id att_id,
+            att.product_attribute_id att_product_attribute_id,
+            att.product_id att_product_id,
+            att.`value` att_value
+        FROM
+            pms_product p
+            LEFT JOIN pms_product_category pc ON p.product_category_id = pc.id
+            LEFT JOIN pms_product_ladder pl ON pl.product_id = p.id
+            LEFT JOIN pms_product_full_reduction pf ON pf.product_id = p.id
+            LEFT JOIN pms_member_price pm ON pm.product_id = p.id
+            LEFT JOIN pms_sku_stock sku ON sku.product_id = p.id
+            LEFT JOIN pms_product_attribute_value att ON att.product_id = p.id
+        WHERE
+            p.id = ${id}
+    </select>
 
 </mapper>
