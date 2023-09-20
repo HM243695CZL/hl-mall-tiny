@@ -52,7 +52,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
         menuIds.addAll(pIds);
         // 根据菜单id查询出菜单
         list(new QueryWrapper<UmsMenu>().in("id", menuIds)
-                .lambda().orderBy(true, true, UmsMenu::getSort))
+                .lambda().orderBy(true, true, UmsMenu::getRank))
                 .stream().forEach(menuItem -> {
                     // 根据角色表查询对应的角色key
                     List<String> roleKey = roleService.listByIds(roleIds).stream().map(UmsRole::getKey).collect(Collectors.toList());
@@ -61,7 +61,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
                     // 设置meta
                     menuMataDTO.setTitle(menuItem.getTitle());
                     menuMataDTO.setIsLink(menuItem.getIsLink());
-                    menuMataDTO.setIsHide(menuItem.getIsHide());
+                    menuMataDTO.setShowLink(menuItem.getShowLink());
                     menuMataDTO.setIsKeepAlive(menuItem.getIsKeepAlive());
                     menuMataDTO.setIsAffix(menuItem.getIsAffix());
                     menuMataDTO.setIsIframe(menuItem.getIsIframe());
@@ -97,7 +97,7 @@ public class UmsMenuServiceImpl extends ServiceImpl<UmsMenuMapper,UmsMenu>implem
     @Override
     public List<UmsMenu> getMenuList() {
         QueryWrapper<UmsMenu> wrapper = new QueryWrapper<>();
-        wrapper.lambda().orderBy(true, true, UmsMenu::getSort);
+        wrapper.lambda().orderBy(true, true, UmsMenu::getRank);
         // 获取所有菜单
         List<UmsMenu> menuLst = list(wrapper);
         // 给菜单设置关联的角色

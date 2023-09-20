@@ -14,7 +14,7 @@ public class MenuMataDTO {
 
     private String isLink;
 
-    private Boolean isHide;
+    private Boolean showLink;
 
     private Boolean isKeepAlive;
 

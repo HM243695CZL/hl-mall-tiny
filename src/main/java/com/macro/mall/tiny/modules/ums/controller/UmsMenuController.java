@@ -6,6 +6,7 @@ import com.macro.mall.tiny.modules.ums.model.UmsMenu;
 import com.macro.mall.tiny.modules.ums.service.UmsMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @Api(tags = "菜单管理")
+@Tag(name = "菜单管理", description = "菜单管理")
 @RequestMapping("/admin/menu")
 public class UmsMenuController {
 

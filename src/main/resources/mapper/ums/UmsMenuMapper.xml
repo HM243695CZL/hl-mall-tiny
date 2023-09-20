@@ -11,12 +11,12 @@
         <result column="component" property="component"/>
         <result column="title" property="title"/>
         <result column="is_link" property="isLink"/>
-        <result column="is_hide" property="isHide"/>
+        <result column="show_link" property="showLink"/>
         <result column="is_keep_alive" property="isKeepAlive"/>
         <result column="is_affix" property="isAffix"/>
         <result column="is_iframe" property="isIframe"/>
         <result column="icon" property="icon"/>
-        <result column="sort" property="sort"/>
+        <result column="rank" property="rank"/>
     </resultMap>
 
     <select id="getMenuList" resultType="com.macro.mall.tiny.modules.ums.model.UmsMenu">
@@ -26,10 +26,10 @@
             m.create_time createTime,
             m.title title,
             m.level level,
-            m.sort sort,
+            m.rank rank,
             m.name name,
             m.icon icon,
-            m.hidden hidden
+            m.show_ink showLink
         FROM
             ums_admin_role_relation arr
                 LEFT JOIN ums_role r ON arr.role_id = r.id
@@ -48,10 +48,10 @@
             m.create_time createTime,
             m.title title,
             m.level level,
-            m.sort sort,
+            m.rank rank,
             m.name name,
             m.icon icon,
-            m.hidden hidden
+            m.show_ink showLink
         FROM
             ums_role_menu_relation rmr
                 LEFT JOIN ums_menu m ON rmr.menu_id = m.id

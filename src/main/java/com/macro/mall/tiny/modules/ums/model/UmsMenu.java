@@ -45,7 +45,6 @@ public class UmsMenu implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "组件地址")
-    @NotBlank(message = "组件地址不能为空")
     private String component;
 
     @ApiModelProperty(value = "菜单名称")
@@ -56,7 +55,7 @@ public class UmsMenu implements Serializable {
     private String isLink;
 
     @ApiModelProperty(value = "是否隐藏")
-    private Boolean isHide;
+    private Boolean showLink;
 
     @ApiModelProperty(value = "是否缓存组件")
     private Boolean isKeepAlive;
@@ -71,7 +70,7 @@ public class UmsMenu implements Serializable {
     private String icon;
 
     @ApiModelProperty(value = "排序")
-    private Integer sort;
+    private Integer rank;
 
     @ApiModelProperty(value = "角色id列表")
     @TableField(exist = false)

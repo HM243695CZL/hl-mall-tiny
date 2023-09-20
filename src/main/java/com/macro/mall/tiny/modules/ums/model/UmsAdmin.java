@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.macro.mall.tiny.common.vo.BaseModelDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,7 +23,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @TableName("ums_admin")
 @ApiModel(value="UmsAdmin对象", description="后台用户表")
-public class UmsAdmin implements Serializable {
+public class UmsAdmin extends BaseModelDTO implements Serializable {
 
     private static final long serialVersionUID=1L;
 
